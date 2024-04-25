@@ -5,12 +5,48 @@
 	</head>
 	<body>
 		<script>
-		  function addItem(name,num) {
-			  
+		  var supply = [];
+		  
+		  //misc functions
+		  function processInfo () {
+			var name = document.getElementById("addItem-name").value;
+			amount = document.getElementById("addItem-amount").value;
+			addItem(name,amount);
 		  }
-			
-		  function addNoOfItem(num) {
+		  
+		  function askUser() {
+			var add = parseInt(prompt('How much to add?')); 
+			var which = prompt('Which item?'); 
+			console.log("Input received from user:", add, which);
+			var addwhich = [add, which]; 
+			addNoOfItem(addwhich);
+		  }
+		  
+		//the user seems to have already decided what it is so... (since there is "name" and "num" parameter)
+		  function addItem(name,num) {
+		      for(i=0; i!=supply.length; i++) {
+				if (name === supply[i].itemName) { 
+					alert("This item already exists in the inventory");
+					return;
+				}
+			  }
 			  
+			  supply.push({"itemName": name, "noOfItem": parseInt(num)});
+			  console.log(supply);
+			  //displayItems();
+		  }
+		
+		  function addNoOfItem(num) {
+			//find item in inventory
+			for (var i = 0; i < supply.length; i++) {
+				if (num[1] === supply[i].itemName) {
+				supply[i].noOfItem += num[0];
+				console.log(supply);
+				return;
+				}
+			}
+			// item not in supply
+			console.log("Item", num[1], "not found in the inventory.");
 		  }
 			
 		  function subNoOfItem(num) {
@@ -25,5 +61,17 @@
 
 		  }
 		</script>
+
+		<form>
+			<fieldset form="newItem">
+				<input type="text" name="itemName" id="addItem-name" placeholder="Name of Item to add">
+				<input type="number" name="itemAmount" id="addItem-amount" placeholder="Amount to add" min=1>
+				<input type="button" onclick="processInfo()" value="Add Item!">
+				<input type="button" onclick="askUser()" value="+">
+
+			</fieldset>
+		</form>
+		
+		<table id="table"></table>
 	</body>
 </html>
