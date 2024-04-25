@@ -50,7 +50,18 @@
 		  }
 			
 		  function subNoOfItem(num) {
-			  
+			  for (var i = 0; i < supply.length; i--) {
+				  if (num[1} === supply[i].itemName) {
+					  if (supply[i].noOfItem - num[0] > 0) {
+						suppy[i].noOfItem = 0;
+					  } else {
+						  supply[i].noOfItem -= num[0];
+					  }
+					  console.log(supply);
+					  return;
+				  }
+			  }
+			 console.log("Item", num[1], "not found in the inventory.") 
 		  }
 
 		  function removeItem(name) {
