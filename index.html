@@ -12,6 +12,7 @@
 			var name = document.getElementById("addItem-name").value;
 			amount = document.getElementById("addItem-amount").value;
 			addItem(name,amount);
+			displayItems();
 		  }
 		  
 		  function askUserAdd() {
@@ -20,6 +21,7 @@
 			console.log("Input received from user:", add, which);
 			var addwhich = [add, which]; 
 			addNoOfItem(addwhich);
+			displayItems();
 		  }
 
 		function askUserSub() {
@@ -28,6 +30,7 @@
 			console.log("Input received from user:", sub, which);
 			var subwhich = [sub, which]; 
 			subNoOfItem(subwhich);
+			displayItems();
 		  }
 		  
 		//the user seems to have already decided what it is so... (since there is "name" and "num" parameter)
@@ -77,8 +80,24 @@
 		  }
 
 		  function displayItems() {
+			var table = document.getElementById("table");
+			table.innerHTML = "";
+			var header = table.createTHead();
+			var row = header.insertRow(0);
+			var cell1 = row.insertCell(0);
+			var cell2 = row.insertCell(1);
+			cell1.innerHTML = "<b>Name of Item</b>";
+			cell2.innerHTML = "<b>No. of Items</b>";
 
-		  }
+			for (var i = 0; i < supply.length; i++) {
+				var item = supply[i];
+				var row = table.insertRow(i + 1);
+				var cell1 = row.insertCell(0);
+				var cell2 = row.insertCell(1);
+				cell1.innerHTML = item.itemName;
+				cell2.innerHTML = item.noOfItem;
+			}
+		}
 		</script>
 
 		<form>
