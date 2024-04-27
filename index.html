@@ -67,14 +67,24 @@
 		  //misc functions
 		  function processInfo () {
 			var name = document.getElementById("addItem-name").value;
-			amount = document.getElementById("addItem-amount").value;
-			addItem(name,amount);
-			displayItems();
+			var amount = document.getElementById("addItem-amount").value;
+			if (amount === "") {
+				alert("Please input a number");
+				return;
+			}	
+			else {
+				addItem(name,amount);
+				displayItems();
+			}
 		  }
 		  
-		  function askUserAdd() {
-			var add = parseInt(prompt('How much to add?')); 
+		  function askUserAdd() {		
 			var which = prompt('Which item?'); 
+			var add = parseInt(prompt('How much to add?'));
+			if (isNaN(add)) {
+				alert("Input numbers only");
+				return;
+			}	
 			console.log("Input received from user:", add, which);
 			var addwhich = [add, which]; 
 			addNoOfItem(addwhich);
@@ -82,8 +92,12 @@
 		  }
 
 		function askUserSub() {
-			var sub = parseInt(prompt('How much to subtract?')); 
 			var which = prompt('Which item?'); 
+			var sub = parseInt(prompt('How much to subtract?')); 
+			if (isNaN(sub)) {
+				alert("Input numbers only");
+				return;
+			}	
 			console.log("Input received from user:", sub, which);
 			var subwhich = [sub, which]; 
 			subNoOfItem(subwhich);
@@ -121,7 +135,7 @@
 				}
 			}
 			// item not in supply
-			console.log("Item", num[1], "not found in the inventory.");
+			alert("The item " + num[1] + " is not found in the inventory.");
 		  }
 			
 		  function subNoOfItem(num) {
@@ -136,7 +150,7 @@
             			return;
        			 	}
    			 }
-    			console.log("Item", num[1], "not found in the inventory.");
+    			alert("The item " + num[1] + " is not found in the inventory.");
 		}
 
 		 function removeItem(name) {
@@ -152,7 +166,7 @@
 				supply.splice(indexRemove, 1);
 				console.log(supply);
 			} else {
-				console.log("Item", name, "not found in the inventory.");
+				alert("The item " + name + " is not found in the inventory.");
 			}
 		}
 
